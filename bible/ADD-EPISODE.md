@@ -6,18 +6,18 @@ Every study page is the same `study.js` reading one data file. A new episode nee
 |---|---|---|
 | 1 | `data/matthew-3.json` | The episode's content (see "Making the data file" below). |
 | 2 | `matthew-3/index.html` | Copy `_template/index.html`, then replace `matthew-N` with `matthew-3`, and `Matthew N`/`TITLE` in the title and description. |
-| 3 | `assets/Matthew-Ep03-<Name>.pdf` | The full-color PDF Solomon made for Goodnotes (from `/workspace/bible-study/offline/`). Images go in `assets/` too. |
+| 3 | `assets/Matthew-Ep03-<Name>.pdf` | The full-color PDF for Goodnotes (built into the working folder's `offline/` directory; see "Offline copy and PDF" below). Images go in `assets/` too. |
 | 4 | `data/episodes.json` | On the Episode 3 entry, set `"page": "matthew-3/"` and `"pdf": "assets/Matthew-Ep03-<Name>.pdf"`. |
 
 ## Making the data file
 
-Solomon builds each episode as a Canvas first. Its data constants (VIDEO, SUMMARY, QUOTES, PASSAGES, LSB_QUOTES, PEOPLE, TERMS, WORDS, BACKGROUND, DEBATES, TIMELINE, XREFS, QUESTIONS, APPLICATION_*, MAP, PLACES, CAREFUL, NOTES, and any episode-specific ones such as FULFIL or ECHOES) convert automatically. The tools live outside this folder, in `/workspace/bible-study/github/tools/` on Solomon's box:
+Solomon builds each episode as a Canvas first. Its data constants (VIDEO, SUMMARY, QUOTES, PASSAGES, LSB_QUOTES, PEOPLE, TERMS, WORDS, BACKGROUND, DEBATES, TIMELINE, XREFS, QUESTIONS, APPLICATION_*, MAP, PLACES, CAREFUL, NOTES, and any episode-specific ones such as FULFIL or ECHOES) convert automatically. The tools live outside this folder, in a `tools/` directory next to `bible/` in the working copy (not published with the site). Run these from that working copy:
 
 ```sh
 # 1. Save the Canvas source (ReadCanvas) to a file, then:
-node tools/canvas-to-json.js ep03_canvas.txt matthew-3 bible/data/matthew-2.json > /tmp/draft3.json
+node tools/canvas-to-json.js ep03_canvas.txt matthew-3 bible/data/matthew-2.json > draft3.json
 # 2. Clean it up: verse-exact LSB links, hub/page/PDF lines and Logos links in the copy-ready notes
-python3 tools/finalize_episode.py /tmp/draft3.json bible/data/matthew-3.json \
+python3 tools/finalize_episode.py draft3.json bible/data/matthew-3.json \
   --pdf Matthew-Ep03-<Name>.pdf --pages <n> --size "<x.x> MB" --factbook "Jesus,..."
 ```
 

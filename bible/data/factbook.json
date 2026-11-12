@@ -1797,6 +1797,34 @@
     "Wrath of God": {
       "label": "Wrath of God",
       "id": "%25wrathOfGod"
+    },
+    "Great Commission": {
+      "label": "Great Commission",
+      "id": "%25GreatCommission"
+    },
+    "Mary Magdalene": {
+      "label": "Mary (Magdalene)",
+      "id": "%23Mary2.2"
+    },
+    "Mary the mother of James": {
+      "label": "Mary (mother of James and Joseph)",
+      "id": "%23Mary2.3"
+    },
+    "Priestly blessing": {
+      "label": "Aaronic blessing",
+      "id": "%25AaronicBlessing"
+    },
+    "Prophet like Moses": {
+      "label": "Jesus was the prophet like Moses",
+      "id": "%25JesusWasProphetLikeMoses_Prophecy"
+    },
+    "Sabbath day's journey": {
+      "label": "Sabbath day's journey",
+      "id": "%24sabbathJourney"
+    },
+    "Salome (follower of Jesus)": {
+      "label": "Salome (witnessed the crucifixion)",
+      "id": "%23Salome.1"
     }
   },
   "aliases": {
