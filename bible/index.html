@@ -6,6 +6,9 @@
 <meta name="theme-color" content="#f4efe6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#161310" media="(prefers-color-scheme: dark)">
 <meta name="color-scheme" content="light dark">
+<script>
+try{var t=localStorage.getItem("shelf-theme");if(t==="light"||t==="dark"){var m=document.querySelector('meta[name="color-scheme"]');if(m)m.content=t;var c=t==="dark"?"#161310":"#f4efe6";var tags=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<tags.length;i++){tags[i].content=c;tags[i].removeAttribute("media");}}}catch(e){}
+</script>
 <meta name="description" content="A home base for the Every Word verse-by-verse series through Matthew.">
 <title>The Gospel of Matthew, Every Word</title>
 <link rel="icon" href="../shelf/favicon.svg" type="image/svg+xml">
@@ -14,12 +17,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cinzel:wght@600;700&family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../shelf/base.css">
 <link rel="stylesheet" href="hub.css">
-<script src="../shelf/theme-init.js"></script>
 </head>
 <body data-root="../">
-<a class="skip" href="#app">Skip to episodes</a>
+<a class="skip" href="#title">Skip to episodes</a>
 <main id="app"><p class="loading">Loading the study hub…</p></main>
 <noscript><p class="noscript">This page needs JavaScript to show the episode list.</p></noscript>
+<script src="../shelf/theme-init.js"></script>
 <script type="module" src="../shelf/nav.js"></script>
 <script type="module" src="hub.js"></script>
 </body>

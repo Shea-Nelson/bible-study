@@ -6,6 +6,9 @@
 <meta name="theme-color" content="#f4efe6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#161310" media="(prefers-color-scheme: dark)">
 <meta name="color-scheme" content="light dark">
+<script>
+try{var t=localStorage.getItem("shelf-theme");if(t==="light"||t==="dark"){var m=document.querySelector('meta[name="color-scheme"]');if(m)m.content=t;var c=t==="dark"?"#161310":"#f4efe6";var tags=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<tags.length;i++){tags[i].content=c;tags[i].removeAttribute("media");}}}catch(e){}
+</script>
 <meta name="description" content="Matthew 8:1-17 study aid: Just Say the Word, Episode 12.">
 <title>Matthew 8:1-17 Study Aid</title>
 <link rel="icon" href="../../shelf/favicon.svg" type="image/svg+xml">
@@ -14,12 +17,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cinzel:wght@600;700&family=Noto+Serif+Hebrew:wght@500&family=Noto+Serif:ital,wght@0,500;1,500&family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../shelf/base.css">
 <link rel="stylesheet" href="../study.css">
-<script src="../../shelf/theme-init.js"></script>
 </head>
 <body data-root="../../" data-study="matthew-12">
-<a class="skip" href="#app">Skip to the study</a>
+<a class="skip" href="#title">Skip to the study</a>
 <main id="app"><p class="loading">Loading the study…</p></main>
 <noscript><p class="noscript">This page needs JavaScript to show the study.</p></noscript>
+<script src="../../shelf/theme-init.js"></script>
 <script type="module" src="../../shelf/nav.js"></script>
 <script type="module" src="../study.js"></script>
 </body>
