@@ -13,8 +13,8 @@
   display: grid; gap: 4px; padding: 14px 16px; border-radius: var(--radius);
   background: var(--card); border: 1.5px solid var(--line);
 }
-.rowcard .lead { font-family: var(--hand); font-size: 22px; color: var(--coral); }
-.rowcard strong { font-family: var(--display); font-size: 20px; }
+.rowcard .lead { font-family: var(--hand); font-size-adjust: from-font; font-size: 22px; color: var(--coral); }
+.rowcard strong { font-family: var(--display); font-size-adjust: from-font; font-size: 20px; }
 .callout {
   border-radius: var(--radius); padding: 14px 16px; background: var(--tint-t); border: 1.5px solid transparent;
 }
@@ -22,7 +22,7 @@
 .callout .leadline { font-weight: 800; display: block; margin-bottom: 4px; }
 .quote {
   margin: 0; padding: 8px 8px 8px 18px; border-left: 4px solid var(--gold-fill);
-  font-family: var(--display); font-style: italic; font-size: 22px;
+  font-family: var(--display); font-size-adjust: from-font; font-style: italic; font-size: 22px;
 }
 .quote cite { display: block; margin-top: 6px; font: 700 13px var(--sans); font-style: normal; color: var(--soft); }
 .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: step; }
@@ -33,7 +33,7 @@
 .steps li::before {
   counter-increment: step; content: counter(step);
   width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center;
-  background: var(--gold-fill); color: #2a2000; font-family: var(--display); font-weight: 900;
+  background: var(--gold-fill); color: #2a2000; font-family: var(--display); font-size-adjust: from-font; font-weight: 900;
 }
 .check { display: flex; gap: 10px; align-items: flex-start; margin-top: 8px; font-weight: 800; }
 .check input, .steps input { width: 22px; height: 22px; margin-top: 2px; accent-color: var(--teal); }

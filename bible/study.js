@@ -197,6 +197,20 @@ function mapBlock() {
   });
   const scroller = el("div", "mapscroll");
   scroller.append(s);
+  const narrowMap = matchMedia("(max-width: 560px)");
+  const syncMapFocus = () => {
+    if (!narrowMap.matches) {
+      scroller.removeAttribute("tabindex");
+      scroller.removeAttribute("role");
+      scroller.removeAttribute("aria-label");
+      return;
+    }
+    scroller.tabIndex = 0;
+    scroller.setAttribute("role", "region");
+    scroller.setAttribute("aria-label", (decor.aria || "Map") + ", scroll sideways");
+  };
+  syncMapFocus();
+  narrowMap.addEventListener("change", syncMapFocus);
   wrap.append(scroller);
   const keyRow = el("div", "legend");
   const pinV = el("span"); pinV.append(Object.assign(el("b", "pinkey"), { style: "background:var(--teal)" }), "Named in the video");
@@ -230,6 +244,7 @@ function section(sid, n) {
   const sec = S[sid] || {};
   const node = el("section", "sec");
   node.id = sid;
+  node.tabIndex = -1;
   node.setAttribute("aria-labelledby", sid + "-h");
   head(sid, sec, n).forEach((x) => node.append(x));
 
@@ -864,6 +879,8 @@ const crumbs = el("nav", "crumbs noprint");
 crumbs.setAttribute("aria-label", "Breadcrumb");
 crumbs.append(link("../", "Matthew study hub"), hidden(el("span", null, " / ")), el("span", null, "Episode " + (meIdx >= 0 ? eps[meIdx].ep : "")));
 const h1 = el("h1");
+h1.id = "title";
+h1.tabIndex = -1;
 h1.append(d.heroBefore, el("em", null, d.heroEm));
 const hand = el("p", "hand", d.hand);
 hand.style.color = "var(--" + (d.handColor || "coral") + ")";
@@ -950,7 +967,41 @@ else {
 }
 addEventListener("beforeprint", revealAll);
 
-if (typeof IntersectionObserver !== "undefined") {
+function centerNavLink(a) {
+  if (!a) return;
+  navInner.scrollTo({ left: a.offsetLeft - navInner.clientWidth / 2 + a.offsetWidth / 2, behavior: reduced ? "auto" : "smooth" });
+}
+function markCurrent(sid) {
+  Object.entries(navLinks).forEach(([k, a]) => {
+    const on = k === sid;
+    a.classList.toggle("target-current", on);
+    if (on) a.setAttribute("aria-current", "true");
+    else a.removeAttribute("aria-current");
+  });
+  centerNavLink(navLinks[sid]);
+}
+const supportsScrollTarget = typeof CSS !== "undefined" && CSS.supports && CSS.supports("scroll-target-group: auto");
+if (supportsScrollTarget) {
+  const sync = () => {
+    const currentLink = navInner.querySelector("a:target-current");
+    if (!currentLink) return;
+    const sid = (currentLink.getAttribute("href") || "").slice(1);
+    if (sid) markCurrent(sid);
+  };
+  sync();
+  const onScrollEnd = (e) => {
+    if (e.target === navInner) return;
+    sync();
+    requestAnimationFrame(sync);
+  };
+  document.addEventListener("scrollend", onScrollEnd, true);
+  navInner.addEventListener("click", (e) => {
+    const a = e.target.closest("a[href^='#']");
+    if (!a) return;
+    const sid = a.getAttribute("href").slice(1);
+    if (sid) markCurrent(sid);
+  });
+} else if (typeof IntersectionObserver !== "undefined") {
   let current = null;
   const spy = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
@@ -958,9 +1009,7 @@ if (typeof IntersectionObserver !== "undefined") {
       const sid = en.target.id;
       if (current === sid) return;
       current = sid;
-      Object.entries(navLinks).forEach(([k, a]) => { if (k === sid) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
-      const a = navLinks[sid];
-      if (a) navInner.scrollTo({ left: a.offsetLeft - navInner.clientWidth / 2 + a.offsetWidth / 2, behavior: reduced ? "auto" : "smooth" });
+      markCurrent(sid);
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
   document.querySelectorAll("section.sec").forEach((s) => spy.observe(s));

@@ -46,6 +46,8 @@ function epName(e) { return e.bonus ? "Bible Night Live " + e.ep.replace("BNL ",
 /* ---------- hero ---------- */
 const hero = el("header", "bible-hero wrap");
 const h1 = el("h1");
+h1.id = "title";
+h1.tabIndex = -1;
 h1.append("The Gospel of ", el("em", null, "Matthew"), ", Every Word");
 const hand = el("p", "hand", data.hand);
 hand.style.color = "var(--coral)";
@@ -111,7 +113,7 @@ function drawNextUp() {
 
 /* ---------- list ---------- */
 const main = el("div", "wrap");
-const tools = el("div", "tools noprint");
+const tools = el("search", "tools noprint");
 const filters = [["all", "All " + total], ["ready", "Study page ready"], ["todo", "Not studied yet"], ["soon", "Coming soon"], ["bonus", "Bonus"]];
 let filter = "all";
 let drawn = false;

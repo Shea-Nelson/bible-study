@@ -24,10 +24,11 @@ a.btn { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; te
   background: color-mix(in srgb, var(--paper) 92%, transparent);
   backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
 }
-.nav-inner { display: flex; gap: 6px; overflow-x: auto; padding-top: 8px; padding-bottom: 8px; scrollbar-width: none; }
+.nav-inner { display: flex; gap: 6px; overflow-x: auto; padding-top: 8px; padding-bottom: 8px; scrollbar-width: none; scroll-target-group: auto; }
 .nav-inner::-webkit-scrollbar { display: none; }
 .nav-inner .chip { flex: 0 0 auto; }
 .nav-inner .chip[aria-current="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.nav-inner .chip:is(:target-current, .target-current) { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
 .sec { padding: 30px 0 6px; scroll-margin-top: 130px; }
 .sec h2 { font-size: clamp(26px, 5vw, 38px); margin: 4px 0 8px; font-weight: 900; }
@@ -56,15 +57,15 @@ a.btn { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; te
 .li { margin: 0; padding-left: 1.1em; }
 .li li { margin: 0 0 8px; }
 .pq {
-  position: relative; font-family: var(--display); font-style: italic;
+  position: relative; font-family: var(--display); font-size-adjust: from-font; font-style: italic;
   font-size: clamp(20px, 4vw, 26px); line-height: 1.35; padding: 16px 16px 16px 48px;
   border-radius: 18px; background: var(--tint-c); margin: 14px 0 0;
 }
 .split .pq, .stack .pq { margin: 0; }
 .split > .stack { align-content: start; }
-.pq::before { content: "\201C"; position: absolute; left: 12px; top: -8px; font-size: 64px; color: var(--coral); font-family: Georgia, serif; }
+.pq::before { content: "\201C"; position: absolute; left: 12px; top: -8px; font-size: 64px; color: var(--coral); font-family: Georgia, serif; font-size-adjust: from-font; }
 .pq cite { display: block; margin-top: 8px; font: 700 13px var(--sans); font-style: normal; color: var(--soft); }
-.verse { font-family: var(--serif); border-radius: 16px; padding: 14px 16px; background: var(--tint-t); border: 1.5px dashed var(--teal); }
+.verse { font-family: var(--serif); font-size-adjust: from-font; border-radius: 16px; padding: 14px 16px; background: var(--tint-t); border: 1.5px dashed var(--teal); }
 .verse a { font: 800 13px var(--sans); display: inline-block; margin-top: 6px; }
 mark.hl { background: linear-gradient(transparent 55%, var(--tint-g) 55%); color: inherit; padding: 0 2px; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
@@ -134,8 +135,8 @@ figure.fig figcaption a { font-size: 12px; color: var(--soft); }
 .marker { color: var(--coral); margin-left: 10px; font-size: 20px; }
 
 /* Words */
-.orig { font-family: var(--serif), var(--hebrew); font-size: 30px; line-height: 1.25; }
-.heb { font-family: var(--hebrew); text-align: left; }
+.orig { font-family: var(--serif), var(--hebrew); font-size-adjust: from-font; font-size: 30px; line-height: 1.25; }
+.heb { font-family: var(--hebrew); font-size-adjust: from-font; text-align: left; }
 .tr { font-weight: 800; }
 .strong { font: 800 12px ui-monospace, monospace; background: var(--tint-v); color: var(--violet); padding: 2px 8px; border-radius: 8px; font-style: normal; }
 .seg { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
@@ -168,7 +169,7 @@ figure.fig figcaption a { font-size: 12px; color: var(--soft); }
 .lock.in .lockicon .o { opacity: 1; transform: none; }
 .pair { display: grid; gap: 8px; margin-top: 8px; }
 @media (min-width: 700px) { .pair { grid-template-columns: 1fr 1fr; } }
-.pair > div { border-radius: 14px; padding: 12px 14px; font-family: var(--serif); font-size: 15.5px; }
+.pair > div { border-radius: 14px; padding: 12px 14px; font-family: var(--serif); font-size-adjust: from-font; font-size: 15.5px; }
 .pair b { display: block; font: 800 12px var(--sans); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; }
 
 /* Exodus echoes */
@@ -230,10 +231,30 @@ a.pncard:hover { border-color: var(--teal); }
 }
 
 /* Episode 3 extras: sky tint, desert wash, river flow, dove hero, radar cards */
-:root { --tint-s: rgba(40, 110, 190, .1); --desert: rgba(200, 150, 60, .2); --flow: #ffffff; }
-@media (prefers-color-scheme: dark) { :root { --tint-s: rgba(158, 203, 255, .14); --desert: rgba(255, 204, 112, .14); --flow: #e6f4ff; } }
-:root[data-theme="light"] { --tint-s: rgba(40, 110, 190, .1); --desert: rgba(200, 150, 60, .2); --flow: #ffffff; }
-:root[data-theme="dark"] { --tint-s: rgba(158, 203, 255, .14); --desert: rgba(255, 204, 112, .14); --flow: #e6f4ff; }
+:root {
+  --tint-s-light: rgba(40, 110, 190, .1);
+  --desert-light: rgba(200, 150, 60, .2);
+  --flow-light: #ffffff;
+  --tint-s-dark: rgba(158, 203, 255, .14);
+  --desert-dark: rgba(255, 204, 112, .14);
+  --flow-dark: #e6f4ff;
+  --tint-s: var(--tint-s-light);
+  --desert: var(--desert-light);
+  --flow: var(--flow-light);
+  &:has(> head > meta[name="color-scheme"][content="dark"]) {
+    --tint-s: var(--tint-s-dark);
+    --desert: var(--desert-dark);
+    --flow: var(--flow-dark);
+  }
+  &:has(> head > meta[name="color-scheme"][content="light"]) {
+    --tint-s: var(--tint-s-light);
+    --desert: var(--desert-light);
+    --flow: var(--flow-light);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root { --tint-s: var(--tint-s-dark); --desert: var(--desert-dark); --flow: var(--flow-dark); }
+}
 .tint-s { background: var(--tint-s); }
 .hero-sky h1 em { background-image: linear-gradient(90deg, var(--sky), var(--teal), var(--gold), var(--coral), var(--sky)); background-size: 200% auto; }
 .flow { stroke-dasharray: 3 9; animation: march 2.4s linear infinite; }
@@ -270,7 +291,7 @@ a.pncard:hover { border-color: var(--teal); }
 .testbadge { flex: none; width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; font-size: 30px; background: var(--accent); box-shadow: 0 6px 0 rgba(0,0,0,.08); transform: rotate(-4deg); }
 .test.in .testbadge { animation: hop .7s ease .2s 2; }
 @keyframes hop { 50% { transform: translateY(-8px) rotate(5deg); } }
-.written { position: relative; margin-top: 10px; border-radius: 14px; padding: 12px 14px 12px; background: var(--tint-g); border: 1.5px dashed var(--gold); font-family: var(--serif); }
+.written { position: relative; margin-top: 10px; border-radius: 14px; padding: 12px 14px 12px; background: var(--tint-g); border: 1.5px dashed var(--gold); font-family: var(--serif); font-size-adjust: from-font; }
 .written b { display: block; font: 800 12px var(--sans); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; color: var(--gold); padding-right: 120px; }
 .stamp { position: absolute; right: 10px; top: 8px; font: 900 12px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--coral); border: 2.5px solid var(--coral); border-radius: 8px; padding: 3px 8px; transform: rotate(-8deg) scale(1); opacity: .9; }
 .test .stamp { opacity: 0; transform: rotate(-8deg) scale(2.2); transition: transform .35s cubic-bezier(.2,1.6,.4,1), opacity .2s; transition-delay: var(--delay, .4s); }
@@ -296,7 +317,7 @@ a.pncard:hover { border-color: var(--teal); }
 /* Episodes 5-9: stepped "ladder" for chiasms and repeated patterns */
 .ladder { padding: 16px 16px 12px; }
 .ladder .kicker { margin: 0 0 8px; color: var(--violet); }
-.rung { display: flex; gap: 10px; align-items: flex-start; margin: 0 0 7px calc(var(--lvl) * 6%); padding: 8px 12px; border-radius: 12px; background: var(--card, transparent); border: 1.5px solid var(--accent); border-left-width: 6px; font-family: var(--serif); line-height: 1.45; opacity: 0; transform: translateX(-14px); transition: opacity .4s, transform .4s; transition-delay: calc(var(--i) * 70ms); }
+.rung { display: flex; gap: 10px; align-items: flex-start; margin: 0 0 7px calc(var(--lvl) * 6%); padding: 8px 12px; border-radius: 12px; background: var(--card, transparent); border: 1.5px solid var(--accent); border-left-width: 6px; font-family: var(--serif); font-size-adjust: from-font; line-height: 1.45; opacity: 0; transform: translateX(-14px); transition: opacity .4s, transform .4s; transition-delay: calc(var(--i) * 70ms); }
 .ladder.in .rung { opacity: 1; transform: none; }
 .rung .rmark { flex: none; font: 900 13px var(--sans); color: var(--accent); min-width: 22px; }
 .rung.peak { background: var(--tint-g); border-color: var(--gold); box-shadow: 0 6px 0 rgba(0,0,0,.06); transform: scale(.98); }

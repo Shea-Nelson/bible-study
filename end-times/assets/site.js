@@ -3,14 +3,10 @@ const PAGES = [
   ["index.html", "Home"], ["glossary.html", "Glossary"], ["views.html", "Views"], ["timelines.html", "Timelines"],
   ["events.html", "Events"], ["characters.html", "Characters"], ["ai.html", "AI & Scripture"], ["sources.html", "Sources"],
 ];
-function applyTheme(next) {
-  if (next) document.documentElement.setAttribute("data-theme", next);
-  else document.documentElement.removeAttribute("data-theme");
-  try { next ? localStorage.setItem("shelf-theme", next) : localStorage.removeItem("shelf-theme"); } catch (e) {}
+function syncThemeButton() {
   const btn = document.querySelector(".theme-btn");
-  if (!btn) return;
-  const ex = document.documentElement.getAttribute("data-theme");
-  const dark = ex ? ex === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  if (!btn || !window.shelfTheme) return;
+  const dark = window.shelfTheme.renderedDark();
   btn.setAttribute("aria-pressed", dark ? "true" : "false");
   btn.textContent = dark ? "Light" : "Dark";
   btn.setAttribute("aria-label", dark ? "Switch to light colors" : "Switch to dark colors");
@@ -20,25 +16,35 @@ function header() {
   const cur = here.startsWith("view-") ? "views.html" : here;
   const h = document.createElement("header"); h.className = "site";
   const b = document.createElement("a"); b.className = "brand"; b.href = "index.html";
-  b.innerHTML = '<img src="assets/favicon.svg" alt="" width="28" height="28"><span>End Times</span>';
+  const img = document.createElement("img");
+  img.src = "assets/favicon.svg"; img.alt = ""; img.width = 28; img.height = 28;
+  const brandName = document.createElement("span");
+  brandName.textContent = "End Times";
+  b.append(img, brandName);
   const nav = document.createElement("nav"); nav.setAttribute("aria-label", "End Times study pages");
+  const list = document.createElement("ul");
   for (const [href, label] of PAGES) {
+    const li = document.createElement("li");
     const a = document.createElement("a"); a.href = href; a.textContent = label;
     if (href === cur) a.setAttribute("aria-current", "page");
-    nav.append(a);
+    li.append(a);
+    list.append(li);
   }
+  const bibleItem = document.createElement("li");
   const bible = document.createElement("a"); bible.href = "../bible/"; bible.className = "sep"; bible.textContent = "Bible hub";
-  nav.append(bible);
+  bibleItem.append(bible);
+  list.append(bibleItem);
+  nav.append(list);
   const t = document.createElement("button"); t.type = "button"; t.className = "theme-btn";
   t.addEventListener("click", () => {
-    const ex = document.documentElement.getAttribute("data-theme");
-    const dark = ex ? ex === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-    applyTheme(dark ? "light" : "dark");
+    if (window.shelfTheme) window.shelfTheme.toggle();
+    syncThemeButton();
   });
   h.append(b, nav, t);
   const skip = document.querySelector(".skip");
   skip ? skip.after(h) : document.body.prepend(h);
-  applyTheme(document.documentElement.getAttribute("data-theme"));
+  syncThemeButton();
+  document.addEventListener("shelf-theme", syncThemeButton);
 }
 function filters() {
   document.querySelectorAll("[data-filter]").forEach((box) => {
@@ -72,5 +78,26 @@ function filters() {
     if (location.hash) { const t = document.getElementById(location.hash.slice(1)); if (t) { t.classList.remove("hidden"); const d = t.querySelector("details"); if (d) d.open = true; setTimeout(() => t.scrollIntoView(), 50); } }
   });
 }
+function syncScrollers() {
+  document.querySelectorAll(".scrollx").forEach((el) => {
+    const overflows = el.scrollWidth > el.clientWidth + 1;
+    if (overflows) {
+      if (!el.dataset.scrollLabel) {
+        const section = el.closest("section");
+        const heading = section && section.querySelector("h2, h1");
+        el.dataset.scrollLabel = heading ? heading.textContent.trim() : "Diagram";
+      }
+      el.tabIndex = 0;
+      el.setAttribute("role", "region");
+      el.setAttribute("aria-label", el.dataset.scrollLabel + ", scroll sideways");
+    } else if (el.getAttribute("role") === "region") {
+      el.removeAttribute("tabindex");
+      el.removeAttribute("role");
+      el.removeAttribute("aria-label");
+    }
+  });
+}
 header();
 filters();
+syncScrollers();
+addEventListener("resize", syncScrollers);
