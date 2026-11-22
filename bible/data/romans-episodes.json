@@ -1,0 +1,282 @@
+{
+  "book": "Romans",
+  "hub": "romans/",
+  "playlistId": "PLfCJX3DN9tK7VQjdbc7GPQ2UMtDPj69AB",
+  "playlistUrl": "https://www.youtube.com/playlist?list=PLfCJX3DN9tK7VQjdbc7GPQ2UMtDPj69AB",
+  "kicker": "Study hub",
+  "title": "Paul's Letter to the Romans, Every Word",
+  "titleParts": [
+    "Paul's Letter to the ",
+    "Romans",
+    ", Every Word"
+  ],
+  "hand": "The gospel, the power of God.",
+  "handColor": "violet",
+  "intro": "A home base for the Every Word channel's verse-by-verse series through Romans. Each card is one video from the playlist, in order. When a study page is ready, the card turns teal and opens it: summary, Old Testament connections, people, places, map, timeline, word studies and questions, with Scripture linked to the LSB, key names linked to the Logos Factbook, and a full-color PDF for Goodnotes.",
+  "note": "Passages: built episodes show the verses the video reads. Cards still to come show only what the video title states, so many simply say Romans until their study page is written.",
+  "foot": "Video titles and order from the Every Word playlist (https://www.youtube.com/playlist?list=PLfCJX3DN9tK7VQjdbc7GPQ2UMtDPj69AB). Scripture links open the Legacy Standard Bible at read.lsbible.org.",
+  "episodes": [
+    {
+      "n": 1,
+      "ep": "1",
+      "title": "Why Paul Preached the Gospel to Christians AGAIN | Romans 1",
+      "passage": "Romans 1:1-15",
+      "id": "CYBNa1pzdjA",
+      "len": "30:24",
+      "bonus": false,
+      "page": "romans-1/",
+      "pdf": "assets/Romans-Ep01-Under-Obligation.pdf"
+    },
+    {
+      "n": 2,
+      "ep": "2",
+      "title": "The Hidden Source of Faith | Romans 1:17",
+      "passage": "Romans 1:16-17",
+      "id": "jhKa_FfG-Q8",
+      "len": "23:36",
+      "bonus": false,
+      "page": "romans-2/",
+      "pdf": "assets/Romans-Ep02-Not-Ashamed.pdf"
+    },
+    {
+      "n": 3,
+      "ep": "3",
+      "title": "God’s Wrath Is Already Happening (Romans 1)",
+      "passage": "Romans 1:18-32",
+      "id": "-gckU8NEie4",
+      "len": "25:12",
+      "bonus": false,
+      "page": "romans-3/",
+      "pdf": "assets/Romans-Ep03-Gave-Them-Over.pdf"
+    },
+    {
+      "n": 4,
+      "ep": "4",
+      "title": "The Dangerous Sin Religious People Don’t See (Romans 2)",
+      "passage": "Romans 2:1-16",
+      "id": "MD8HcEwSBnU",
+      "len": "35:14",
+      "bonus": false,
+      "page": "romans-4/",
+      "pdf": "assets/Romans-Ep04-Doers-of-the-Law.pdf"
+    },
+    {
+      "n": 5,
+      "ep": "5",
+      "title": "The Sin Religious People Don't Know They're Committing",
+      "passage": "Romans 2:17-3:8",
+      "id": "dnGRP_SSzUk",
+      "len": "33:28",
+      "bonus": false,
+      "page": "romans-5/",
+      "pdf": "assets/Romans-Ep05-A-Jew-Inwardly.pdf"
+    },
+    {
+      "n": 6,
+      "ep": "6",
+      "title": "Why Paul Says 'No One Is Good' (Romans 3 Explained)",
+      "passage": "Romans 3",
+      "id": "KZ3MktmTKrY",
+      "len": "32:49",
+      "bonus": false
+    },
+    {
+      "n": 7,
+      "ep": "7",
+      "title": "What Paul Really Means by Righteousness (Romans 4)",
+      "passage": "Romans 4",
+      "id": "C9Bd6rhTig4",
+      "len": "33:57",
+      "bonus": false
+    },
+    {
+      "n": 8,
+      "ep": "8",
+      "title": "You Don’t Understand Romans 5… And It’s Affecting Your Gospel",
+      "passage": "Romans 5",
+      "id": "Dhd8u7YKV3M",
+      "len": "40:09",
+      "bonus": false
+    },
+    {
+      "n": 9,
+      "ep": "9",
+      "title": "If Grace Covers Sin… Why Stop Sinning?",
+      "passage": "Romans",
+      "id": "PosnUZwOwPs",
+      "len": "29:29",
+      "bonus": false
+    },
+    {
+      "n": 10,
+      "ep": "10",
+      "title": "You’re Not Struggling With Sin — You’re Thinking About It Wrong",
+      "passage": "Romans",
+      "id": "0ef2olRJMK0",
+      "len": "30:19",
+      "bonus": false
+    },
+    {
+      "n": 11,
+      "ep": "11",
+      "title": "The LIE We Believe About Freedom",
+      "passage": "Romans",
+      "id": "UCErLOgmYbI",
+      "len": "29:45",
+      "bonus": false
+    },
+    {
+      "n": 12,
+      "ep": "12",
+      "title": "Romans 7 Isn't Telling You to Stay Stuck",
+      "passage": "Romans 7",
+      "id": "Ts2eileMrvI",
+      "len": "40:19",
+      "bonus": false
+    },
+    {
+      "n": 13,
+      "ep": "13",
+      "title": "The Church Won’t Save You",
+      "passage": "Romans",
+      "id": "sw08eGr2dKA",
+      "len": "36:24",
+      "bonus": false
+    },
+    {
+      "n": 14,
+      "ep": "14",
+      "title": "Romans 8:28: The Verse Christians Quote Before They Understand It",
+      "passage": "Romans 8:28",
+      "id": "pyIMC7I1cA4",
+      "len": "36:46",
+      "bonus": false
+    },
+    {
+      "n": 15,
+      "ep": "15",
+      "title": "Why Romans 8 Doesn’t Always Feel True",
+      "passage": "Romans 8",
+      "id": "Hi9XQVPVtnQ",
+      "len": "34:47",
+      "bonus": false
+    },
+    {
+      "n": 16,
+      "ep": "16",
+      "title": "The Romans 9 Debate Is Wrong",
+      "passage": "Romans 9",
+      "id": "OsYPqUNIcBE",
+      "len": "52:24",
+      "bonus": false
+    },
+    {
+      "n": 17,
+      "ep": "17",
+      "title": "You Can Love the Bible and Still Miss Jesus",
+      "passage": "Romans",
+      "id": "ubEEcCsCLBc",
+      "len": "40:30",
+      "bonus": false
+    },
+    {
+      "n": 18,
+      "ep": "18",
+      "title": "A Lot of Christians Don’t Understand Grace",
+      "passage": "Romans",
+      "id": "gvJ-QS6vo2A",
+      "len": "37:14",
+      "bonus": false
+    },
+    {
+      "n": 19,
+      "ep": "19",
+      "title": "Romans 11 Is a Warning Christians Keep Ignoring",
+      "passage": "Romans 11",
+      "id": "FhcP7ugo0_U",
+      "len": "38:55",
+      "bonus": false
+    },
+    {
+      "n": 20,
+      "ep": "20",
+      "title": "Paul Says YOU Are the Sacrifice | Romans 12",
+      "passage": "Romans 12",
+      "id": "F89ifYmrzGE",
+      "len": "32:23",
+      "bonus": false
+    },
+    {
+      "n": 21,
+      "ep": "21",
+      "title": "Christians Are Fighting Evil the Wrong Way",
+      "passage": "Romans",
+      "id": "L7cAtwKBSwU",
+      "len": "24:24",
+      "bonus": false
+    },
+    {
+      "n": 22,
+      "ep": "22",
+      "title": "Christian Must Obey the Government -- Until This Happens",
+      "passage": "Romans",
+      "id": "7h3z62Lg0Kk",
+      "len": "24:20",
+      "bonus": false
+    },
+    {
+      "n": 23,
+      "ep": "23",
+      "title": "What If Knowing the Bible Is Making You Worse?",
+      "passage": "Romans",
+      "id": "Y5BdXeDMm4w",
+      "len": "37:05",
+      "bonus": false
+    },
+    {
+      "n": 24,
+      "ep": "24",
+      "title": "God ALREADY Welcomed the Christians You're Trying to Fix",
+      "passage": "Romans",
+      "id": "VW04bI_YZg8",
+      "len": "29:04",
+      "bonus": false
+    },
+    {
+      "n": 25,
+      "ep": "25",
+      "title": "When Being Right Becomes Sin",
+      "passage": "Romans",
+      "id": "fkDQg__frZw",
+      "len": "26:55",
+      "bonus": false
+    },
+    {
+      "n": 26,
+      "ep": "26",
+      "title": "Your Church Can Get Along—and Still Be Divided",
+      "passage": "Romans",
+      "id": "47qqgx_5Cv8",
+      "len": "34:09",
+      "bonus": false
+    },
+    {
+      "n": 27,
+      "ep": "27",
+      "title": "Christians Have Made the Gospel Too Small",
+      "passage": "Romans",
+      "id": "vc3lo7nQQbE",
+      "len": "36:09",
+      "bonus": false
+    },
+    {
+      "n": 28,
+      "ep": "28",
+      "title": "A Satanic Pattern Is Spreading Through Christian Circles",
+      "passage": "Romans",
+      "id": "rRO-8zBOzTE",
+      "len": "51:29",
+      "bonus": false
+    }
+  ]
+}

@@ -19,13 +19,13 @@
 @keyframes twinkle { 0%, 100% { transform: scale(1) rotate(0); opacity: .9; } 50% { transform: scale(1.25) rotate(18deg); opacity: 1; } }
 .fgroup { display: flex; flex-wrap: wrap; gap: 8px; }
 .tagrow { display: flex; flex-wrap: wrap; gap: 6px; }
-.epnum { font-family: var(--kicker); font-size-adjust: from-font; color: var(--acc); font-weight: 700; }
+.epnum { font-family: var(--kicker); color: var(--acc); font-weight: 700; }
 .ep.studied { opacity: .92; }
 .ep.studied .pass::after { content: " ✓"; color: var(--teal); }
 .ep.next { border-color: var(--gold); box-shadow: 0 0 0 3px var(--tint-g); }
 .tag.nexttag { background: var(--gold-fill); color: #2a2000; }
 .prog-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: baseline; }
-.prog-n { font-family: var(--display); font-size-adjust: from-font; font-weight: 900; font-size: 28px; }
+.prog-n { font-family: var(--display); font-weight: 900; font-size: 28px; }
 .track { height: 14px; border-radius: 999px; background: var(--tint-v); overflow: hidden; margin-top: 8px; }
 .fill {
   height: 100%; width: 0; border-radius: 999px;
@@ -51,7 +51,7 @@
 .ep.ready { border-color: var(--teal); box-shadow: 0 0 0 3px var(--tint-t); }
 .ep.bonus { background: linear-gradient(135deg, var(--tint-g), var(--card) 60%); }
 .ep h3 { font-size: 18px; margin: 0; }
-.pass { font-family: var(--hand); font-size-adjust: from-font; font-size: 22px; line-height: 1.1; color: var(--acc, var(--coral)); }
+.pass { font-family: var(--hand); font-size: 22px; line-height: 1.1; color: var(--acc, var(--coral)); }
 .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
 .links a { color: var(--ink); }
 a.go { background: var(--coral); border-color: var(--coral); color: var(--on-coral); }
@@ -79,3 +79,15 @@ a.go { background: var(--coral); border-color: var(--coral); color: var(--on-cor
   .ep { break-inside: avoid; }
   .nextup { display: none; }
 }
+
+/* Series strip (one card per book study; added with Romans) */
+.series { display: flex; flex-wrap: wrap; align-items: stretch; gap: 10px; margin: 18px 0 6px; }
+.series > .kicker { flex-basis: 100%; margin: 0; }
+.scard { --acc: var(--teal); display: grid; grid-template-columns: auto 1fr; column-gap: 10px; align-items: center; min-width: 200px; padding: 10px 14px; border-radius: 14px; border: 2px solid var(--line); background: var(--card); color: var(--ink); text-decoration: none; box-shadow: var(--shadow); transition: transform .2s, border-color .2s; }
+.scard .semoji { grid-row: span 2; font-size: 26px; }
+.scard strong { font-family: var(--display); font-size: 17px; }
+.scard .small { font-size: 13px; color: var(--soft); }
+a.scard:hover, a.scard:focus-visible { transform: translateY(-2px); border-color: var(--acc); }
+.scard.here { border-color: var(--acc); background: color-mix(in srgb, var(--acc) 9%, var(--card)); }
+.scard.soon { opacity: .75; }
+@media (prefers-reduced-motion: reduce) { .scard { transition: none; } }

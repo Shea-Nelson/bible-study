@@ -1,15 +1,20 @@
 /* Study pages render bible/data/<id>.json (set by <body data-study="<id>">).
-   Shared data: data/factbook.json (verified Logos Factbook ids) and data/episodes.json
-   (episode order, used for the previous/next links). To add an episode, see bible/ADD-EPISODE.md.
+   Shared data: data/factbook.json (verified Logos Factbook ids) and the series' episode list
+   (data/episodes.json for matthew-N, data/<book>-episodes.json for <book>-N), used for the
+   previous/next links and the hub link. To add an episode, see bible/ADD-EPISODE.md.
    Scripture and note strings are rendered as text, never as HTML. */
 const id = document.body.dataset.study;
+const SER = id.replace(/-\d+$/, "");
+const EPFILE = SER === "matthew" ? "episodes" : SER + "-episodes";
 const here = (p) => new URL(p, import.meta.url).href;
 const getJSON = (p) => fetch(here(p)).then((r) => { if (!r.ok) throw new Error(p); return r.json(); });
 const [d, FB, EPS] = await Promise.all([
   getJSON("data/" + id + ".json"),
   getJSON("data/factbook.json").catch(() => null),
-  getJSON("data/episodes.json").catch(() => null),
+  getJSON("data/" + EPFILE + ".json").catch(() => null),
 ]);
+const BOOK = (EPS && EPS.book) || "Matthew";
+const HUB = "../" + ((EPS && EPS.hub) || "");
 
 const app = document.querySelector("#app");
 const S = d.sections;
@@ -197,20 +202,6 @@ function mapBlock() {
   });
   const scroller = el("div", "mapscroll");
   scroller.append(s);
-  const narrowMap = matchMedia("(max-width: 560px)");
-  const syncMapFocus = () => {
-    if (!narrowMap.matches) {
-      scroller.removeAttribute("tabindex");
-      scroller.removeAttribute("role");
-      scroller.removeAttribute("aria-label");
-      return;
-    }
-    scroller.tabIndex = 0;
-    scroller.setAttribute("role", "region");
-    scroller.setAttribute("aria-label", (decor.aria || "Map") + ", scroll sideways");
-  };
-  syncMapFocus();
-  narrowMap.addEventListener("change", syncMapFocus);
   wrap.append(scroller);
   const keyRow = el("div", "legend");
   const pinV = el("span"); pinV.append(Object.assign(el("b", "pinkey"), { style: "background:var(--teal)" }), "Named in the video");
@@ -244,7 +235,6 @@ function section(sid, n) {
   const sec = S[sid] || {};
   const node = el("section", "sec");
   node.id = sid;
-  node.tabIndex = -1;
   node.setAttribute("aria-labelledby", sid + "-h");
   head(sid, sec, n).forEach((x) => node.append(x));
 
@@ -335,12 +325,12 @@ function section(sid, n) {
       const body = el("div");
       const single = !!f.otBook && REF.test(f.ot);
       const h = el("h3");
-      h.append(f.n + ". ", lsbLink(f.mt, "Matthew", 1), " ");
+      h.append(f.n + ". ", lsbLink(f.mt, BOOK, 1), " ");
       h.append(hidden(el("span", "soft", "←")), " ");
       h.append(single ? lsbLink(f.ot, f.otBook, f.otCh) : f.ot);
       const pair = el("div", "pair");
       const left = el("div", "tint-t");
-      left.append(Object.assign(el("b", null, "Matthew (LSB)"), { style: "color:var(--teal)" }), "“" + f.mtText + "”");
+      left.append(Object.assign(el("b", null, BOOK + " (LSB)"), { style: "color:var(--teal)" }), "“" + f.mtText + "”");
       const right = el("div", single ? "tint-c" : "tint-v");
       right.append(Object.assign(el("b", null, single ? f.ot + " (LSB)" : "No single source verse"), { style: "color:" + (single ? "var(--coral)" : "var(--violet)") }), single ? "“" + f.otText + "”" : f.otText);
       pair.append(left, right);
@@ -367,12 +357,12 @@ function section(sid, n) {
       const left = el("div", "tint-c");
       const lb = el("b", null, "The tempter · ");
       lb.style.color = "var(--coral)";
-      lb.append(lsbLink(t.offerRef, "Matthew", 4));
+      lb.append(lsbLink(t.offerRef, BOOK, 4));
       left.append(lb, "“" + t.offer + "”");
       const right = el("div", "tint-t");
       const rb = el("b", null, "Jesus · ");
       rb.style.color = "var(--teal)";
-      rb.append(lsbLink(t.answerRef, "Matthew", 4));
+      rb.append(lsbLink(t.answerRef, BOOK, 4));
       right.append(rb, "“" + t.answer + "”");
       pair.append(left, right);
       const src = el("div", "written");
@@ -424,7 +414,7 @@ function section(sid, n) {
       radar.style.setProperty("--delay", (0.15 + (i % 3) * 0.2) + "s");
       hidden(radar);
       const h = el("h3");
-      h.append(lsbLink(v.ot, v.otBook, v.otCh), " ", hidden(el("span", "soft", "→")), " ", lsbLink(v.nt, "Matthew", 3));
+      h.append(lsbLink(v.ot, v.otBook, v.otCh), " ", hidden(el("span", "soft", "→")), " ", lsbLink(v.nt, BOOK, 3));
       if (v.src === "lsb") h.append(" ", el("span", "tag b", "Added"));
       const pair = el("div", "pair");
       const left = el("div", "tint-c");
@@ -456,7 +446,7 @@ function section(sid, n) {
       const nk = el("div", "kicker");
       nk.style.color = "var(--teal)";
       nk.append("Now · ");
-      if (REF.test(e.nowRef)) nk.append(lsbLink(e.nowRef, "Matthew", 1)); else nk.append(e.nowRef);
+      if (REF.test(e.nowRef)) nk.append(lsbLink(e.nowRef, BOOK, 1)); else nk.append(e.nowRef);
       if (e.src === "added") nk.append(" ", el("span", "tag b", "Added"));
       now.append(nk, document.createTextNode(e.now));
       row.append(then, arrow, now);
@@ -658,7 +648,7 @@ function section(sid, n) {
         row.style.setProperty("--accent", tone[r.color] || accents[i % 5]);
         if (r.mark) row.append(hidden(el("span", "rmark", r.mark)));
         const tx = el("span", "rtext");
-        if (r.ref) tx.append(lsbLink(r.ref, r.book || "Matthew", r.ch || 1, r.short || r.ref, "mini"), " ");
+        if (r.ref) tx.append(lsbLink(r.ref, r.book || BOOK, r.ch || 1, r.short || r.ref, "mini"), " ");
         tx.append(r.text);
         if (r.tail) tx.append(" ", el("mark", "hl", r.tail));
         row.append(tx);
@@ -678,7 +668,7 @@ function section(sid, n) {
         const box = el("div", tint[p.tone || fallback] || "tint-t");
         const b = el("b", null, (p.who || "") + (p.ref ? " · " : ""));
         b.style.color = tone[p.tone || fallback] || "var(--teal)";
-        if (p.ref) b.append(lsbLink(p.ref, p.book || "Matthew", p.ch || 1));
+        if (p.ref) b.append(lsbLink(p.ref, p.book || BOOK, p.ch || 1));
         box.append(b, p.plain ? p.text : "“" + p.text + "”");
         return box;
       };
@@ -877,10 +867,8 @@ if (d.heroIcon === "dove") {
 }
 const crumbs = el("nav", "crumbs noprint");
 crumbs.setAttribute("aria-label", "Breadcrumb");
-crumbs.append(link("../", "Matthew study hub"), hidden(el("span", null, " / ")), el("span", null, "Episode " + (meIdx >= 0 ? eps[meIdx].ep : "")));
+crumbs.append(link(HUB, BOOK + " study hub"), hidden(el("span", null, " / ")), el("span", null, "Episode " + (meIdx >= 0 ? eps[meIdx].ep : "")));
 const h1 = el("h1");
-h1.id = "title";
-h1.tabIndex = -1;
 h1.append(d.heroBefore, el("em", null, d.heroEm));
 const hand = el("p", "hand", d.hand);
 hand.style.color = "var(--" + (d.handColor || "coral") + ")";
@@ -888,7 +876,7 @@ const meta = el("div", "meta");
 const chapter = d.chapterRef || (d.PASSAGES[0] && d.PASSAGES[0].ref.split(":")[0]);
 meta.append(
   link(d.VIDEO.url, "▶ Watch on YouTube", "pill"),
-  lsbLink(chapter, "Matthew", 1, "Read " + chapter + " in the LSB", "pill"),
+  lsbLink(chapter, BOOK, 1, "Read " + chapter + " in the LSB", "pill"),
   el("span", "pill", d.VIDEO.length),
   el("span", "pill", "Channel: " + d.VIDEO.channel)
 );
@@ -967,41 +955,7 @@ else {
 }
 addEventListener("beforeprint", revealAll);
 
-function centerNavLink(a) {
-  if (!a) return;
-  navInner.scrollTo({ left: a.offsetLeft - navInner.clientWidth / 2 + a.offsetWidth / 2, behavior: reduced ? "auto" : "smooth" });
-}
-function markCurrent(sid) {
-  Object.entries(navLinks).forEach(([k, a]) => {
-    const on = k === sid;
-    a.classList.toggle("target-current", on);
-    if (on) a.setAttribute("aria-current", "true");
-    else a.removeAttribute("aria-current");
-  });
-  centerNavLink(navLinks[sid]);
-}
-const supportsScrollTarget = typeof CSS !== "undefined" && CSS.supports && CSS.supports("scroll-target-group: auto");
-if (supportsScrollTarget) {
-  const sync = () => {
-    const currentLink = navInner.querySelector("a:target-current");
-    if (!currentLink) return;
-    const sid = (currentLink.getAttribute("href") || "").slice(1);
-    if (sid) markCurrent(sid);
-  };
-  sync();
-  const onScrollEnd = (e) => {
-    if (e.target === navInner) return;
-    sync();
-    requestAnimationFrame(sync);
-  };
-  document.addEventListener("scrollend", onScrollEnd, true);
-  navInner.addEventListener("click", (e) => {
-    const a = e.target.closest("a[href^='#']");
-    if (!a) return;
-    const sid = a.getAttribute("href").slice(1);
-    if (sid) markCurrent(sid);
-  });
-} else if (typeof IntersectionObserver !== "undefined") {
+if (typeof IntersectionObserver !== "undefined") {
   let current = null;
   const spy = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
@@ -1009,7 +963,9 @@ if (supportsScrollTarget) {
       const sid = en.target.id;
       if (current === sid) return;
       current = sid;
-      markCurrent(sid);
+      Object.entries(navLinks).forEach(([k, a]) => { if (k === sid) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
+      const a = navLinks[sid];
+      if (a) navInner.scrollTo({ left: a.offsetLeft - navInner.clientWidth / 2 + a.offsetWidth / 2, behavior: reduced ? "auto" : "smooth" });
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
   document.querySelectorAll("section.sec").forEach((s) => spy.observe(s));
