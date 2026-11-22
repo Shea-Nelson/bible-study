@@ -1,10 +1,17 @@
-/* Episode list lives in data/episodes.json. To publish another study, see bible/ADD-EPISODE.md:
+/* One hub per book series. <body data-series="romans-episodes" data-base="../"> picks the episode list
+   (default data/episodes.json = Matthew) and the path from the hub back to bible/. The series strip at the top
+   comes from data/series.json. To publish another study, see bible/ADD-EPISODE.md:
    1. Add bible/data/<id>.json.  2. Copy bible/_template/index.html to bible/<id>/index.html and set data-study.
-   3. Set that episode's "page" (and "pdf") in data/episodes.json. Prev/next links and "Next up" update themselves. */
-const data = await fetch(new URL("data/episodes.json", import.meta.url).href).then((r) => {
-  if (!r.ok) throw new Error("episodes");
+   3. Set that episode's "page" (and "pdf") in the series' episode list. Prev/next links and "Next up" update themselves. */
+const getJSON = (p) => fetch(new URL(p, import.meta.url).href).then((r) => {
+  if (!r.ok) throw new Error(p);
   return r.json();
 });
+const SERIES_FILE = document.body.dataset.series || "episodes";
+const BASE = document.body.dataset.base || "";
+const [data, SERIES] = await Promise.all([getJSON("data/" + SERIES_FILE + ".json"), getJSON("data/series.json").catch(() => null)]);
+const BOOK = data.book || "Matthew";
+data.episodes.forEach((e) => { if (e.page) e.page = BASE + e.page; if (e.pdf) e.pdf = BASE + e.pdf; });
 
 const app = document.querySelector("#app");
 const accents = ["var(--coral)", "var(--teal)", "var(--gold)", "var(--violet)", "var(--sky)"];
@@ -30,7 +37,7 @@ function link(href, text, cls) {
   return /^https?:/.test(href) ? external(a) : a;
 }
 function chapterOf(p) {
-  const m = /Matthew (\d+)/.exec(p || "");
+  const m = new RegExp(BOOK + " (\\d+)").exec(p || "");
   return m ? parseInt(m[1], 10) : 0;
 }
 function lsbLink(p) {
@@ -46,13 +53,12 @@ function epName(e) { return e.bonus ? "Bible Night Live " + e.ep.replace("BNL ",
 /* ---------- hero ---------- */
 const hero = el("header", "bible-hero wrap");
 const h1 = el("h1");
-h1.id = "title";
-h1.tabIndex = -1;
-h1.append("The Gospel of ", el("em", null, "Matthew"), ", Every Word");
+const tp = data.titleParts || ["The Gospel of ", "Matthew", ", Every Word"];
+h1.append(tp[0], el("em", null, tp[1]), tp[2]);
 const hand = el("p", "hand", data.hand);
-hand.style.color = "var(--coral)";
+hand.style.color = "var(--" + (data.handColor || "coral") + ")";
 const meta = el("div", "meta");
-meta.append(link(data.playlistUrl, "▶ Full playlist on YouTube", "pill"), link("https://read.lsbible.org/?q=Matthew+1", "Read Matthew in the LSB", "pill"));
+meta.append(link(data.playlistUrl, "▶ Full playlist on YouTube", "pill"), link("https://read.lsbible.org/?q=" + BOOK.replace(/ /g, "+") + "+1", "Read " + BOOK + " in the LSB", "pill"));
 
 function bar(label, n, cls) {
   const box = el("div", "bar " + cls);
@@ -73,7 +79,30 @@ function bar(label, n, cls) {
 const prog = el("div", "prog");
 const nextUp = el("div", "nextup");
 nextUp.setAttribute("aria-live", "polite");
-hero.append(el("p", "kicker", "Study hub · " + total + " videos · LSB"), h1, hand, el("p", "lede", data.intro), meta, nextUp, prog);
+/* Series strip: every book study on the site, with how many pages are ready. */
+const shelf = el("nav", "series noprint");
+shelf.setAttribute("aria-label", "Book studies");
+async function drawSeries() {
+  if (!SERIES) return;
+  const lists = await Promise.all(SERIES.series.map((s) => (s.data === SERIES_FILE ? Promise.resolve(data) : s.data ? getJSON("data/" + s.data + ".json").catch(() => null) : Promise.resolve(null))));
+  shelf.append(el("span", "kicker", "Book studies"));
+  SERIES.series.forEach((s, i) => {
+    const L = lists[i];
+    const ready = L ? L.episodes.filter((e) => e.page).length : 0;
+    const of = L ? L.episodes.filter((e) => !e.bonus).length : 0;
+    const here = s.data === SERIES_FILE;
+    const card = s.href && !here && L ? el("a", "scard") : el("div", "scard" + (here ? " here" : " soon"));
+    if (card.tagName === "A") card.href = BASE + s.href;
+    if (here) card.setAttribute("aria-current", "page");
+    card.style.setProperty("--acc", "var(--" + (s.color || "teal") + ")");
+    const em = el("span", "semoji", s.emoji || "📖");
+    em.setAttribute("aria-hidden", "true");
+    card.append(em, el("strong", null, s.title), el("span", "small", L ? ready + " of " + of + " study pages" + (here ? " · you are here" : "") : s.status || "Coming soon"));
+    shelf.append(card);
+  });
+}
+await drawSeries();
+hero.append(el("p", "kicker", "Study hub · " + total + " videos · LSB"), h1, hand, el("p", "lede", data.intro), meta, shelf, nextUp, prog);
 
 function drawProgress() {
   const studied = readStudied();
@@ -113,7 +142,7 @@ function drawNextUp() {
 
 /* ---------- list ---------- */
 const main = el("div", "wrap");
-const tools = el("search", "tools noprint");
+const tools = el("div", "tools noprint");
 const filters = [["all", "All " + total], ["ready", "Study page ready"], ["todo", "Not studied yet"], ["soon", "Coming soon"], ["bonus", "Bonus"]];
 let filter = "all";
 let drawn = false;
@@ -126,7 +155,7 @@ const buttons = filters.map(([k, label]) => {
 });
 const search = el("input", "search");
 search.type = "search";
-search.placeholder = "Search a title or passage, e.g. Matthew 13";
+search.placeholder = "Search a title or passage, e.g. " + (data.searchHint || BOOK + " 13");
 search.setAttribute("aria-label", "Search episodes");
 search.addEventListener("input", () => { query = search.value; draw(); });
 const fgroup = el("div", "fgroup");
@@ -137,7 +166,9 @@ tools.append(fgroup, search);
 const count = el("p", "note");
 count.setAttribute("aria-live", "polite");
 const grid = el("div", "grid");
-main.append(tools, count, grid, el("div", "callout-note", data.note), el("p", "note", data.foot));
+main.append(tools, count, grid);
+if (data.note) main.append(el("div", "callout-note", data.note));
+main.append(el("p", "note", data.foot));
 app.replaceChildren(hero, main);
 
 function draw() {

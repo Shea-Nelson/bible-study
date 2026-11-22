@@ -73,3 +73,20 @@ Only ids in `data/factbook.json` are used. They were looked up in Logos; **never
 - Checks: `python3 tools/check_quotes.py matthew-N` (write other books' refs in full; bare "c:v" is read as Matthew) and `python3 tools/check_words.py matthew-N`.
 - Logos notes: `python3 build/logos_ep.py N` writes `logos/epNN/` (8 notes plus `00_index.txt`) from the data file; `build/needs_ids_ep5_9.py` writes the needs_ids lists.
 
+
+## Adding a book series (added with Romans, Nov 2026)
+
+Each book gets its own hub and episode list; Matthew keeps its original paths.
+
+- Pages: `bible/<book>-N/index.html` (copy `_template`, set `data-study="<book>-N"`, title and description). Data: `bible/data/<book>-N.json`.
+- Episode list: `bible/data/<book>-episodes.json` with `book` (display name) and `hub` (folder, e.g. `"romans/"`). Matthew's list stays `episodes.json`.
+- Hub: `bible/<book>/index.html` with `<body data-series="<book>-episodes" data-base="../">`. `hub.js` reads the series file, so title, "Read <Book>" link and search hint come from the data.
+- `bible/data/series.json` lists every book study (name, hub, count, status). Both hubs draw it as the "Book studies" strip; add the next book there first (Hebrews is listed as "Coming after Romans").
+- `study.js` picks the episode list from the page id prefix (`matthew` → `episodes.json`, otherwise `<book>-episodes.json`) and takes `BOOK` and the hub link from it, so crumbs, prev/next and "Read <Book>" work for any book.
+
+### Romans tools
+
+- Builders: `tools/build_romans_epNN.py` (one per episode) on top of `tools/romans_lib.py` (map loader, `fig()`, `fb_add()` which copies only verified ids from `scripts/factbook_cache.json`, `finish()`), and `tools/romans_logos.py` (8 Logos notes plus `00_index.txt` and `needs_ids.txt` in `logos/romans-epNN/`).
+- `check_quotes.py` now reads bare "c:v" refs in the page's own book (Romans pages read as Romans). Write other books' refs in full.
+- Maps: `maps/mediterranean.json` and `maps/eastmed.json` (Natural Earth land, public domain).
+- One command per episode: `python3 romans/tools/pipeline.py N` builds the page shell, list entry, data, quote and word checks, a console-error check on the local server, the offline copy and PDF (twice, so the page count and size are real), and copies the PDF into `assets/`.

@@ -1,0 +1,26 @@
+{
+  "series": [
+    {
+      "title": "Matthew",
+      "data": "episodes",
+      "href": "",
+      "emoji": "👑",
+      "color": "coral"
+    },
+    {
+      "title": "Romans",
+      "data": "romans-episodes",
+      "href": "romans/",
+      "emoji": "📜",
+      "color": "violet"
+    },
+    {
+      "title": "Hebrews",
+      "data": null,
+      "href": null,
+      "emoji": "⛺",
+      "color": "gold",
+      "status": "Coming after Romans"
+    }
+  ]
+}

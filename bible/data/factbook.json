@@ -1825,6 +1825,30 @@
     "Salome (follower of Jesus)": {
       "label": "Salome (witnessed the crucifixion)",
       "id": "%23Salome.1"
+    },
+    "Corinth": {
+      "label": "Corinth",
+      "id": "%25Corinth_Place"
+    },
+    "Grace": {
+      "label": "Grace",
+      "id": "%25grace"
+    },
+    "Wisdom": {
+      "label": "Wisdom",
+      "id": "%25Wisdom"
+    },
+    "Conscience": {
+      "label": "Conscience",
+      "id": "%25conscience"
+    },
+    "Peace": {
+      "label": "Peace",
+      "id": "%25peace"
+    },
+    "Circumcision": {
+      "label": "Circumcision",
+      "id": "%25circumcision"
     }
   },
   "aliases": {
