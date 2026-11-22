@@ -42,19 +42,23 @@
       "n": 3,
       "ep": "3",
       "title": "You're Asking God the Wrong Question About Suffering",
-      "passage": "Hebrews",
+      "passage": "Hebrews 2:9-18",
       "id": "dUJaxvKw9WA",
       "len": "35:09",
-      "bonus": false
+      "bonus": false,
+      "page": "hebrews-3/",
+      "pdf": "assets/Hebrews-Ep03-Perfect-Through-Sufferings.pdf"
     },
     {
       "n": 4,
       "ep": "4",
       "title": "God Rescued Them... Then Refused to Let Them In",
-      "passage": "Hebrews",
+      "passage": "Hebrews 3:1-19",
       "id": "ip5U0BknulM",
       "len": "39:47",
-      "bonus": false
+      "bonus": false,
+      "page": "hebrews-4/",
+      "pdf": "assets/Hebrews-Ep04-Today-If-You-Hear-His-Voice.pdf"
     }
   ]
 }
