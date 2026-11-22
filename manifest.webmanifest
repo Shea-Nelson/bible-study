@@ -1,0 +1,36 @@
+{
+  "name": "The Gospel of Matthew, Every Word",
+  "short_name": "Bible Study",
+  "id": "/bible-study/",
+  "start_url": "/bible-study/",
+  "scope": "/bible-study/",
+  "display": "standalone",
+  "background_color": "#f4efe6",
+  "theme_color": "#241910",
+  "icons": [
+    {
+      "src": "/bible-study/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/bible-study/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/bible-study/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/bible-study/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
