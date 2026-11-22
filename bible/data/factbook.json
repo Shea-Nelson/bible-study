@@ -1849,6 +1849,14 @@
     "Circumcision": {
       "label": "Circumcision",
       "id": "%25circumcision"
+    },
+    "Holiness": {
+      "label": "Holiness",
+      "id": "%25holiness"
+    },
+    "Sanctification": {
+      "label": "Sanctification",
+      "id": "%25sanctification"
     }
   },
   "aliases": {

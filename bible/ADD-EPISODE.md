@@ -88,5 +88,7 @@ Each book gets its own hub and episode list; Matthew keeps its original paths.
 
 - Builders: `tools/build_romans_epNN.py` (one per episode) on top of `tools/romans_lib.py` (map loader, `fig()`, `fb_add()` which copies only verified ids from `scripts/factbook_cache.json`, `finish()`), and `tools/romans_logos.py` (8 Logos notes plus `00_index.txt` and `needs_ids.txt` in `logos/romans-epNN/`).
 - `check_quotes.py` now reads bare "c:v" refs in the page's own book (Romans pages read as Romans). Write other books' refs in full.
-- Maps: `maps/mediterranean.json` and `maps/eastmed.json` (Natural Earth land, public domain).
+- Maps (Natural Earth land, public domain): `maps/mediterranean.json`, `maps/eastmed.json` and `maps/crescent.json` (the Fertile Crescent, for Ur, Haran and Babylon). New frames: `python3 romans/tools/make_map.py NAME lon0 lon1 lat0 lat1`.
+- Images: `romans/tools/get_images.py` downloads public-domain Commons files with curl (Python's urllib gets HTTP 429 from the thumbnail servers).
+- Missing Factbook ids for a batch: `python3 romans/tools/needs_all.py FIRST LAST` writes `logos/needs_ids_romans_epFF-LL.txt` and fails if any listed term already has a verified id.
 - One command per episode: `python3 romans/tools/pipeline.py N` builds the page shell, list entry, data, quote and word checks, a console-error check on the local server, the offline copy and PDF (twice, so the page count and size are real), and copies the PDF into `assets/`.
