@@ -16,11 +16,10 @@
     },
     {
       "title": "Hebrews",
-      "data": null,
-      "href": null,
+      "data": "hebrews-episodes",
+      "href": "hebrews/",
       "emoji": "⛺",
-      "color": "gold",
-      "status": "Coming after Romans"
+      "color": "gold"
     }
   ]
 }
