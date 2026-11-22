@@ -1969,6 +1969,34 @@
     "Robert H. Mounce": {
       "label": "Robert H. Mounce",
       "ref": "bio.roberthmounce"
+    },
+    "Amos": {
+      "label": "Amos",
+      "id": "%23Amos.1"
+    },
+    "Book of Proverbs": {
+      "label": "Book of Proverbs",
+      "id": "%25BookOfProverbs_Writing"
+    },
+    "Halakhah": {
+      "label": "Halakhah",
+      "id": "%25Halakah"
+    },
+    "James": {
+      "label": "James (brother of Jesus)",
+      "id": "%23James.4"
+    },
+    "Molinism": {
+      "label": "Molinism",
+      "id": "%25Molinism"
+    },
+    "John the Apostle": {
+      "label": "John the Apostle",
+      "id": "%23John"
+    },
+    "Ezekiel (prophet)": {
+      "label": "Ezekiel (prophet)",
+      "id": "%23Jehezkel.2"
     }
   },
   "aliases": {
