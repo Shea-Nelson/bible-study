@@ -1,0 +1,60 @@
+{
+  "book": "Hebrews",
+  "hub": "hebrews/",
+  "playlistId": "PLEje06qXea_0",
+  "playlistUrl": "https://www.youtube.com/playlist?list=PLEje06qXea_0",
+  "kicker": "Study hub",
+  "title": "The Letter to the Hebrews, Every Word",
+  "titleParts": [
+    "The Letter to the ",
+    "Hebrews",
+    ", Every Word"
+  ],
+  "hand": "Better than the angels, better than Moses.",
+  "handColor": "gold",
+  "intro": "A home base for the Every Word channel's verse-by-verse series through Hebrews. Each card is one video from the series, in teaching order (the playlist itself lists the newest video first). When a study page is ready, the card turns teal and opens it: summary, Old Testament connections, people, places, map, timeline, word studies and questions, with Scripture linked to the LSB, key names linked to the Logos Factbook, and a full-color PDF for Goodnotes.",
+  "note": "The series is still being released, so the total grows as new videos come out. Passages: built episodes show the verses the video reads; cards still to come say only Hebrews until their study page is written.",
+  "foot": "Video titles from the Every Word playlist (https://www.youtube.com/playlist?list=PLEje06qXea_0), listed oldest first. Scripture links open the Legacy Standard Bible at read.lsbible.org.",
+  "episodes": [
+    {
+      "n": 1,
+      "ep": "1",
+      "title": "When God Doesn't Make Sense, Christians Make THIS Mistake",
+      "passage": "Hebrews 1:1-14",
+      "id": "Jgn-KkgZhjs",
+      "len": "38:29",
+      "bonus": false,
+      "page": "hebrews-1/",
+      "pdf": "assets/Hebrews-Ep01-The-Radiance-of-His-Glory.pdf"
+    },
+    {
+      "n": 2,
+      "ep": "2",
+      "title": "You Can Walk Away from Jesus Without Ever Rejecting Him",
+      "passage": "Hebrews 2:1-8",
+      "id": "dGatPzDGOq0",
+      "len": "30:35",
+      "bonus": false,
+      "page": "hebrews-2/",
+      "pdf": "assets/Hebrews-Ep02-Lest-We-Drift.pdf"
+    },
+    {
+      "n": 3,
+      "ep": "3",
+      "title": "You're Asking God the Wrong Question About Suffering",
+      "passage": "Hebrews",
+      "id": "dUJaxvKw9WA",
+      "len": "35:09",
+      "bonus": false
+    },
+    {
+      "n": 4,
+      "ep": "4",
+      "title": "God Rescued Them... Then Refused to Let Them In",
+      "passage": "Hebrews",
+      "id": "ip5U0BknulM",
+      "len": "39:47",
+      "bonus": false
+    }
+  ]
+}

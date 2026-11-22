@@ -295,28 +295,34 @@
       "n": 26,
       "ep": "26",
       "title": "Your Church Can Get Along—and Still Be Divided",
-      "passage": "Romans",
+      "passage": "Romans 15:1-13",
       "id": "47qqgx_5Cv8",
       "len": "34:09",
-      "bonus": false
+      "bonus": false,
+      "page": "romans-26/",
+      "pdf": "assets/Romans-Ep26-With-One-Voice.pdf"
     },
     {
       "n": 27,
       "ep": "27",
       "title": "Christians Have Made the Gospel Too Small",
-      "passage": "Romans",
+      "passage": "Romans 15:14-33",
       "id": "vc3lo7nQQbE",
       "len": "36:09",
-      "bonus": false
+      "bonus": false,
+      "page": "romans-27/",
+      "pdf": "assets/Romans-Ep27-The-Offering-of-the-Gentiles.pdf"
     },
     {
       "n": 28,
       "ep": "28",
       "title": "A Satanic Pattern Is Spreading Through Christian Circles",
-      "passage": "Romans",
+      "passage": "Romans 16:1-27",
       "id": "rRO-8zBOzTE",
       "len": "51:29",
-      "bonus": false
+      "bonus": false,
+      "page": "romans-28/",
+      "pdf": "assets/Romans-Ep28-Wise-in-What-Is-Good.pdf"
     }
   ]
 }

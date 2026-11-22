@@ -1997,6 +1997,50 @@
     "Ezekiel (prophet)": {
       "label": "Ezekiel (prophet)",
       "id": "%23Jehezkel.2"
+    },
+    "Spain": {
+      "label": "Spain",
+      "id": "%25Spain_Place"
+    },
+    "Macedonia": {
+      "label": "Macedonia",
+      "id": "%25Macedonia_Place"
+    },
+    "Priest": {
+      "label": "Priest",
+      "id": "%23priest"
+    },
+    "Phoebe": {
+      "label": "Phoebe",
+      "id": "%23Phoebe.1"
+    },
+    "Cenchreae": {
+      "label": "Cenchreae",
+      "id": "%25Cenchreae_Place"
+    },
+    "Tertius": {
+      "label": "Tertius",
+      "id": "%23Tertius.1"
+    },
+    "Timothy": {
+      "label": "Timothy",
+      "id": "%23Timothy"
+    },
+    "Ephesus": {
+      "label": "Ephesus",
+      "id": "%25Ephesus_Place"
+    },
+    "Habakkuk": {
+      "label": "Habakkuk",
+      "id": "%23Habakkuk.1"
+    },
+    "Holy of Holies": {
+      "label": "Holy of Holies",
+      "id": "%24sacredTempleArea"
+    },
+    "Son of man": {
+      "label": "Son of man",
+      "id": "%23SonOfMan"
     }
   },
   "aliases": {

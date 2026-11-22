@@ -97,7 +97,7 @@ async function drawSeries() {
     card.style.setProperty("--acc", "var(--" + (s.color || "teal") + ")");
     const em = el("span", "semoji", s.emoji || "📖");
     em.setAttribute("aria-hidden", "true");
-    card.append(em, el("strong", null, s.title), el("span", "small", L ? ready + " of " + of + " study pages" + (here ? " · you are here" : "") : s.status || "Coming soon"));
+    card.append(em, el("strong", null, s.title), el("span", "small", L ? ready + " of " + of + " study pages" + (of && ready === of ? " · complete" : "") + (here ? " · you are here" : "") : s.status || "Coming soon"));
     shelf.append(card);
   });
 }
